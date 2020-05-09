@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'Login_Screen.dart';
 class ShopBottomNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,8 +22,9 @@ class ShopBottomNavigator extends StatelessWidget {
                   ),),
                   IconButton(
                     icon: Icon(Icons.person,color: Colors.blueGrey[600],),
-                    onPressed: ()=>(Navigator.pushNamed(context, '/eight')
-                    ),),
+                    onPressed: ()=>(Navigator.pushNamed(context, '/eight')),
+                    //onPressed:()=> LoginPage(),
+                  ),
                 ],
               ),
             ),

@@ -6,12 +6,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 //import 'package:flutter/material.dart';
-import 'dart:io';
+//import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'ClassOfScreens.dart';
 //import 'Login_Screen.dart';
 //import 'Search.dart';
+import 'Login_Screen.dart';
+import 'Search.dart';
 import 'ShopBottomNavigator-1.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 //mypacks
@@ -180,7 +182,33 @@ class FirstScreen extends State<FirstScreenState>{
 
 }
 
+class customAppBar1 extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      color:Colors.pink[500],
+      padding: EdgeInsets.fromLTRB(24, 36, 24, 24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Icon(Icons.menu,size: 32,color: Colors.white,),
+              Text('طراحان نوین مدار',style: TextStyle(fontSize: 18.0),),
+              Icon(Icons.shopping_cart,size: 32,color: Colors.white,),
+            ],
+          ),
+          //SizedBox(height: 28,),
+          searchBox(),
 
+        ],
+      ),
+    );;
+  }
+
+}
 Widget customAppBar(){
   return Container(
     color:Colors.pink[500],
@@ -203,27 +231,37 @@ Widget customAppBar(){
     ),
   );
 }
+class searchBox extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return TextField(
+      textAlign: TextAlign.right,
+      controller: null,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        hintText: 'محصول مورد نظر',
+        hintStyle: TextStyle(fontSize: 18,color:Colors.black12),
+        //prefixIcon:Icon(Icons.search,size: 18,color: Colors.black12,),//*********************************************
+        prefixIcon:IconButton(
+        icon: Icon(Icons.search,color: Colors.blueGrey[600],),
+        onPressed: ()=>(Navigator.pushNamed(context, '/eleven')
+        ),),
 
-Widget searchBox(){
-  return TextField(
-    textAlign: TextAlign.left,
-    controller: null,
-    keyboardType: TextInputType.text,
-    decoration: InputDecoration(
-      hintText: 'محصول مورد نظر',
-      hintStyle: TextStyle(fontSize: 18,color:Colors.black12),
-      prefixIcon:Icon(Icons.search,size: 18,color: Colors.black12,),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(36.0),
-        borderSide: BorderSide(
-          width: 0.0,
-          style: BorderStyle.none,
-        )
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(36.0),
+            borderSide: BorderSide(
+              width: 0.0,
+              style: BorderStyle.none,
+            )
+        ),
+        filled: true,
+        contentPadding: EdgeInsets.all(16),
+        fillColor: Colors.white,
+
       ),
-      filled: true,
-      contentPadding: EdgeInsets.all(16),
-      fillColor: Colors.white,
+    );
+  }
 
-    ),
-  );
 }
+
