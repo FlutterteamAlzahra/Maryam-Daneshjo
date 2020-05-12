@@ -45,7 +45,6 @@ class ProductsState extends State<Products>{
           prod_name:product_list[index]['name'],
           prod_picture:product_list[index]['picture'],
           prod_price:product_list[index]['price'],
-
         );
       },
     );
@@ -83,4 +82,12 @@ class Single_prod extends StatelessWidget{
     );
   }
 
+}
+
+
+void main(){
+  seyHello('maryam','zahra');
+}
+seyHello([a,b='negin',c='mina']){
+  print('hello $a & $b $c');
 }

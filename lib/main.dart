@@ -3,17 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-
-//import 'package:flutter/material.dart';
-//import 'dart:io';
 import 'package:flutter/cupertino.dart';
-//import 'package:flutter/material.dart';
 import 'ClassOfScreens.dart';
-//import 'Login_Screen.dart';
-//import 'Search.dart';
-import 'Login_Screen.dart';
-import 'Search.dart';
 import 'ShopBottomNavigator-1.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 //mypacks
@@ -82,6 +73,7 @@ class FirstScreen extends State<FirstScreenState>{
       ),
     );
     var labels =['مبدل','ایسیوکیت','اسیلوسکوپ','پراگرامر','لوازم جانبی'];
+
     return Scaffold(/*appBar: AppBar(centerTitle: true,title: Text(' فروشگاه',style: TextStyle(color: Colors.blueGrey,fontFamily: "Bamshad"),), backgroundColor: Colors.black12, elevation:0,actions: <Widget>[
       IconButton(
         icon: Icon(Icons.shop,color: Colors.black45,),
@@ -112,6 +104,7 @@ class FirstScreen extends State<FirstScreenState>{
         body: new ListView(
 
           children:<Widget>[
+            //customAppBar1(),
             customAppBar(),
             Container(height: 5.0,),
             image_carousel,
@@ -209,6 +202,7 @@ class customAppBar1 extends StatelessWidget{
   }
 
 }
+
 Widget customAppBar(){
   return Container(
     color:Colors.pink[500],
@@ -231,13 +225,14 @@ Widget customAppBar(){
     ),
   );
 }
+
 class searchBox extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return TextField(
       textAlign: TextAlign.right,
-      controller: null,
+      //controller: null,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         hintText: 'محصول مورد نظر',
@@ -263,5 +258,42 @@ class searchBox extends StatelessWidget{
     );
   }
 
+
 }
+
+class Search extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Search App"),
+        actions : <Widget>[
+          IconButton(icon:Icon(Icons.search), onPressed: (){})
+
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+//mina
+
+/*class  Search_Bar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+                title: Text(' Search ')
+            ),
+            body: Center(
+                child: ListSearch()
+            )
+        )
+    );
+  }*/
+
 

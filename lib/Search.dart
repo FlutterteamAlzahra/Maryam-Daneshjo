@@ -17,8 +17,6 @@ class Search extends StatelessWidget {
 
 
 
-//mina
-
 class  Search_Bar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,7 @@ class  Search_Bar extends StatelessWidget {
     );
   }
 }
-
+//mina
 class ListSearch extends StatefulWidget {
   ListSearchState createState() => ListSearchState();
 }

@@ -41,7 +41,7 @@ class Category extends StatelessWidget{
   final String image_caption;
 
   const Category({Key key, this.image_location, this.image_caption}) : super(key: key);
-  //category({this.image_location, this.image_caption});
+  //category({this.image_location, this.image_caption});//kar nakard
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -65,7 +65,5 @@ class Category extends StatelessWidget{
         ),
       ),
     );
-
   }
-
 }
