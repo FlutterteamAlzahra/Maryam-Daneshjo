@@ -10,26 +10,31 @@ class Products extends StatefulWidget{
 class ProductsState extends State<Products>{
   var product_list=[
     {
+      'id':1,
       'name':'پراگرمر',
       'picture':'images/cat/5000-1.png',
       'price':100,
     },
     {
+      'id':2,
       'name':'پراگرمر',
       'picture':'images/cat/5000-1.png',
       'price':100,
     },
     {
+      'id':3,
       'name':'پراگرمر',
       'picture':'images/cat/5000-1.png',
       'price':100,
     },
     {
+      'id':4,
       'name':'پراگرمر',
       'picture':'images/cat/5000-1.png',
       'price':100,
     },
     {
+      'id':5,
       'name':'پراگرمر',
       'picture':'images/cat/5000-1.png',
       'price':100,
@@ -42,6 +47,7 @@ class ProductsState extends State<Products>{
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index){
         return Single_prod(
+          id: product_list[index]['id'],
           prod_name:product_list[index]['name'],
           prod_picture:product_list[index]['picture'],
           prod_price:product_list[index]['price'],
@@ -53,10 +59,11 @@ class ProductsState extends State<Products>{
 }
 class Single_prod extends StatelessWidget{
   final prod_name;
+  final id;
   final prod_picture;
   final prod_price;
 
-  const Single_prod({Key key, this.prod_name, this.prod_picture, this.prod_price}) : super(key: key);
+  const Single_prod({Key key,this.id, this.prod_name, this.prod_picture, this.prod_price}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -64,7 +71,7 @@ class Single_prod extends StatelessWidget{
       padding: EdgeInsets.all(20.0),
         child:Card(
           child: Hero(
-              tag: prod_name,
+              tag: this.id,
               child:InkWell(onTap: (){},
                 child: GridTile(
                   footer: Container(
