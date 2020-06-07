@@ -4,7 +4,12 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:mainappstore1/Screens/mahsool.dart';
 
 import 'Screens/Sell_Page.dart';
+import 'Screens/amoozesh.dart';
+import 'Screens/configuration.dart';
+import 'Screens/gallery/gallery_example.dart';
 import 'Screens/profile.dart';
+
+import 'package:getflutter/getflutter.dart';
 
 void main(){
   runApp(MaterialApp(
@@ -34,10 +39,37 @@ class HomePage extends StatefulWidget{
 
 }
 class HomePageState extends State<HomePage> {
+
+
+  List list = [
+    "Flutter",
+    "React",
+    "Ionic",
+    "Xamarin",
+  ];
+  String currentProfilePic = "https://avatars3.githubusercontent.com/u/16825392?s=460&v=4";
+  String otherProfilePic = "https://yt3.ggpht.com/-2_2skU9e2Cw/AAAAAAAAAAI/AAAAAAAAAAA/6NpH9G8NWf4/s900-c-k-no-mo-rj-c0xffffff/photo.jpg";
+
+  void switchAccounts() {
+    String picBackup = currentProfilePic;
+    this.setState(() {
+      currentProfilePic = otherProfilePic;
+      otherProfilePic = picBackup;
+    });
+  }
+
   bool isDrawerOpen = false;
+  bool selectAdvice = false;
   double drawerWidth = 300;
   double xOffset = -300;
   double yOffset = 0;
+  TextStyle draweriststyle = TextStyle(
+      color: Colors.black87,
+      fontSize: 16,
+      backgroundColor: null,
+      decorationColor: null,
+      decoration: TextDecoration.none
+  );
 
   Color backHomeColor = Color.fromRGBO(253,209,72, 1.0);
   double heightOfTopContainer = 240;
@@ -59,7 +91,7 @@ class HomePageState extends State<HomePage> {
 
   TextEditingController _textController = TextEditingController();
 
-  static List<String> mainDataList = [
+  static List<String> searchDataList = [
     "Aa",
     "B",
     "Ac",
@@ -85,11 +117,11 @@ class HomePageState extends State<HomePage> {
   ];
 
   // Copy Main List into New List.
-  List<String> newDataList = List.from(mainDataList);
+  List<String> newDataList = List.from(searchDataList);
 
   onItemChanged(String value) {
     setState(() {
-      newDataList = mainDataList
+      newDataList = searchDataList
           .where((string) => string.toLowerCase().contains(value.toLowerCase()))
           .toList();
     });
@@ -105,6 +137,7 @@ class HomePageState extends State<HomePage> {
               setState(() => _currentIndex = index);
             },
             children: <Widget>[
+
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -156,43 +189,87 @@ class HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top:heightOfTopContainer-26,left: 15.0, right: 15.0),
-                          child: Material(
-                            elevation: 5.0,
-                            borderRadius: BorderRadius.circular(5.0),
-                            child: TextField(
-                                onChanged: onItemChanged,
-                                controller: _textController,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    prefixIcon: Icon(Icons.search,
-                                        color:backHomeColor,
-                                        size: 30.0),
-                                    contentPadding:
-                                    EdgeInsets.only(right: 15.0, top: 10.0),
-                                    hintText: 'جستجو...',
-                                    hintStyle: TextStyle(
-                                      color: Colors.grey,
-                                      //fontFamily: 'Quicksand'
-                                    ))),
-                          ),
-                        ),
+                        Stack(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(top:heightOfTopContainer-26,left: 15.0, right: 15.0),
+                              child: Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(5.0),
+                                child: TextField(
+                                    onChanged: onItemChanged,
+                                    controller: _textController,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        prefixIcon: Icon(Icons.search,
+                                            color:backHomeColor,
+                                            size: 30.0),
+                                        contentPadding:
+                                        EdgeInsets.only(right: 15.0, top: 10.0),
+                                        hintText: 'جستجو...',
+                                        hintStyle: TextStyle(
+                                          color: Colors.grey,
+                                          //fontFamily: 'Quicksand'
+                                        ))),
+                              ),
+                            ),
+                          ],
+                        )
 
                       ],
                     ),
-                    SizedBox(height: 15.0,),
-                    CategoryScrollable(),
-                    ItemCard('پروگرامر مدل 5000', 'assets/images/5000-1.png', false ,1),
-                    ItemCard('پروگرامر مدل 5000', 'assets/images/6664.png', true , 2),
-                    ItemCard('پروگرامر مدل 5000', 'assets/images/DSLR-800-2.png', true ,3)
+                    Stack(
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            SizedBox(height: 15.0,),
+                            CategoryScrollable(),
+                            SizedBox(height: 15.0,),
+                            topListMenu(),
+                            ItemCard('پروگرامر مدل 5000', 'assets/images/5000-1.png', false ,1),
+                            ItemCard('پروگرامر مدل 5000', 'assets/images/6664.png', true , 2),
+                            ItemCard('پروگرامر مدل 5000', 'assets/images/DSLR-800-2.png', true ,3)
+                          ],
+                        ),
+
+                        //search box
+                        Padding(
+                          padding: EdgeInsets.only(top:5.0,left: 15.0, right: 15.0),
+                          child: Material(
+                              elevation: 3.0,
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Container(
+                                //transform: Matrix4.translationValues(-35.0, 160, 0),
+                                width: double.infinity,
+                                //height: 300.0,
+                                height: (newDataList.length==0 ||_textController.text.isEmpty)? 0.0:newDataList.length>3? 100.0:newDataList.length*43.0,
+                                color: Colors.black26,
+                                child: ListView(
+                                  padding: EdgeInsets.only(right: 2.0,top: 0.00),
+                                  children: newDataList.map((data) {
+                                    return ListTile(
+                                      contentPadding: EdgeInsets.only(top:0.0,bottom: 2.0,right: 40.0),
+                                      title: Text(data),
+                                      onTap: (){
+                                        print(data);
+                                        _textController.text=data;
+                                        selectAdvice =true;
+                                      }
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
               //add to pages
-              Profile(),
-              Profile(),
-              Profile(),
+              SellPage(),
+              SellPage(),
+              SellPage(),
             ],
           ),
           bottomNavigationBar: BottomNavyBar(
@@ -257,40 +334,56 @@ class HomePageState extends State<HomePage> {
               height: MediaQuery.of(context).size.height,
               width: drawerWidth,
               color: Colors.white,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding:EdgeInsets.only(right: 15,top: 55),
-                    height: 220.0,
-                    width: double.infinity,
-                    color: Colors.grey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        CircleAvatar(radius: 25,backgroundColor: Color.fromRGBO(253,209,72, 1.0),),
-                       SizedBox(height: 10.0,),
-                        Text('نام کابر',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white,backgroundColor: null,decorationColor: null),),
-                        SizedBox(height: 7.0,),
-                        Text('useraddress@gmaol.com',style: TextStyle(fontSize: 14,color: Colors.white,backgroundColor:null,decorationColor: null )),
-
-
-                      ],
+              child: Material(
+                //type: MaterialType.transparency,
+                child: new ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    //Text('item1',textAlign: TextAlign.right,style: draweriststyle,),
+                    new UserAccountsDrawerHeader(
+                      accountEmail: new Text("useraccount@gmail.com",style: TextStyle(color: Colors.black),),
+                      accountName: new Text("userName",style: TextStyle(color: Colors.black)),
+                      currentAccountPicture: new GestureDetector(
+                        child: new CircleAvatar(
+                          backgroundImage: new NetworkImage(currentProfilePic),
+                        ),
+                        onTap: () => print("This is your current account."),
+                      ),
+                      /*otherAccountsPictures: <Widget>[
+                        new GestureDetector(
+                          child: new CircleAvatar(
+                            backgroundImage: new NetworkImage(otherProfilePic),
+                          ),
+                          onTap: () => switchAccounts(),
+                        ),
+                      ],*/
+                      decoration: new BoxDecoration(
+                        color: Colors.grey[200],
+                          image: new DecorationImage(
+                              image: new NetworkImage("https://img00.deviantart.net/35f0/i/2015/018/2/6/low_poly_landscape__the_river_cut_by_bv_designs-d8eib00.jpg"),
+                              fit: BoxFit.fill
+                          )
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(right: 30,top: 20),
-                    child: Column(
-
-                      children: <Widget>[
-                        Text('علاقه مندیها '),
-                        Text('علاقه مندیها محصولات بیشتر'),
-                        Text('ارتباط با ماا '),
-                      ],
-                    ),
-                  ),
-                ],
+                    Column(
+                    children: drawerItems.map((element) => ListTile(
+                        title: new Text(element['title']),
+                        trailing: new Icon(element['icon']),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>element['nameOfClassRoot']));
+                          setState(() {
+                            xOffset=-300;
+                            yOffset=0;
+                            isDrawerOpen=false;
+                          });
+                        }
+                    ),).toList(),
+                      ),
+                  ],
+                ),
               ),
             ),
+
           ),
         ),
       ],
@@ -319,16 +412,6 @@ class CategoryScrollable extends StatelessWidget{
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 color: Colors.white70,
-
-                /*gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.white70,
-                      Color.fromRGBO(253,209,72, 1.0),
-                      Colors.white70,
-                    ]
-                ),*/
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black26,
@@ -486,4 +569,73 @@ class ItemCartState extends State<ItemCard>{
       ),
     );
   }
+}
+class topListMenu extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Stack(
+      children: <Widget>[
+        //SizedBox(height: 10.0,),
+        Material(
+          elevation: 1.0,
+          child: Container(
+            padding: EdgeInsets.only(top: 5.0,right: 20.0,left: 20.0),
+            height: 80.0,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                topItemMenu('آموزش',Icon(Icons.school),Amoozesh(),context),
+                topItemMenu('اخبار',Icon(Icons.phone_android),GalleryExample(),context),
+                topItemMenu('قوانین',Icon(Icons.warning),GalleryExample(),context),
+                topItemMenu('تماس با ما',Icon(Icons.phone),GalleryExample(),context),
+              ],
+            )
+          ),
+        )
+      ],
+    );
+  }
+}
+class topItemMenu extends StatelessWidget{
+  final txt;
+  final Icon icon;
+  final linkClass;
+  final homeContext;
+  topItemMenu(this.txt, this.icon, this.linkClass, this.homeContext);
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(
+      //mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        /*Container(
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            //image:
+                          )
+                      ),
+                    ),*/
+        Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.yellow,
+            ),
+            //padding: EdgeInsets.all(10.0),
+            child: IconButton(
+                icon:this.icon,
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (homeContext)=>linkClass));
+              },
+            )
+        ),
+        Text(this.txt)
+      ],
+    );
+  }
+
 }
