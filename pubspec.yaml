@@ -32,6 +32,10 @@ dev_dependencies:
   flutter_localizations:
     sdk: flutter
   bottom_navy_bar: ^5.4.0
+  http: 0.12.1
+
+
+
 
 
 # For information on the generic Dart part of this file, see the
@@ -56,8 +60,12 @@ flutter:
     - assets/images/DSLR-800-2.png
     - assets/images/multiplex.png
     - assets/images/tnm-sw.jpg
-    - assets/amoozesh.txt
-
+    - images/i1.jpg
+    - images/i2.jpg
+    - images/i3.jpg
+    - images/i4.jpg
+    - images/i5.jpg
+    - images/i6.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

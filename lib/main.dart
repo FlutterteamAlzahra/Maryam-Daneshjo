@@ -3,13 +3,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:mainappstore1/Screens/mahsool.dart';
 
+import 'Screens/Liked_Page.dart';
 import 'Screens/Sell_Page.dart';
 import 'Screens/amoozesh.dart';
 import 'Screens/configuration.dart';
 import 'Screens/gallery/gallery_example.dart';
-import 'Screens/profile.dart';
+
 
 import 'package:getflutter/getflutter.dart';
+
+import 'Screens/product_page.dart';
 
 void main(){
   runApp(MaterialApp(
@@ -267,9 +270,12 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               //add to pages
+              /*SellPage(),
               SellPage(),
-              SellPage(),
-              SellPage(),
+              SellPage(),*/
+              Product(),
+              Screen1(),
+              Like(),
             ],
           ),
           bottomNavigationBar: BottomNavyBar(
