@@ -276,8 +276,8 @@ class HomePageState extends State<HomePage> {
               SellPage(),*/
               Product(),
               Screen1(),
-              //Like(),
-              Store(),
+              Like(),
+              //Store(),
             ],
           ),
           bottomNavigationBar: BottomNavyBar(
