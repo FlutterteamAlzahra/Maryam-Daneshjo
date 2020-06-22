@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:mainappstore1/Screens/mahsool.dart';
+import 'package:mainappstore1/Screens/mhsl.dart';
 
 import 'Screens/Liked_Page.dart';
 import 'Screens/Sell_Page.dart';
@@ -275,7 +276,8 @@ class HomePageState extends State<HomePage> {
               SellPage(),*/
               Product(),
               Screen1(),
-              Like(),
+              //Like(),
+              Store(),
             ],
           ),
           bottomNavigationBar: BottomNavyBar(
